@@ -1,49 +1,40 @@
+Flatiron Data Science Program
+Module 2 
+
+September 25, 2020
+
 # Case Study - Hypothesis Testing
 
-## Where stuff is 
-* `notebooks/student.ipynb` -> notebook where work goes
-* `data/northWind.sqlite` -> dataset you'll be using
-* `images/` -> put any images you use here
-* `notebooks/` -> if you make extra notebooks, put them here
-
-## Deliverables
-* Notebooks(s) with questions answered
-    * hypothesis tests conducted correctly
-    * test for normality
-* Three code snippets to share with others
-    * Did you write a cool function? 
-    * Did you create a .py File
-    * Did you make a class that will take in data and test it?
-    * Did you make a function for visualizations?
-* Custom README.md
-    * Show Intro
-    * Show Questions
-* No Presentation (Unless you want to make one)
+---
 
 ## Instructions
 You are a DS working for Northwind, a supplier company.  Your job is find interesting relationships in their database.  They have tasked you with two questions. You'll find these in the notebooks. You are then tasked to dig into the data in a way that you find interesting.
 
+## Data
+The database for this analysis was accessed from the northWind.sqlite database provided for this study. Target data was the quantity of items per order, grouped by ordering region. 
 
-* Answer the following questions using sampling distributions
-* For each question
-    * Setup a hypothesis test writing H0 and HA
-    * Conduct test with a alpha of 0.05
-    * Show distributions in a visualization
-        * Use a legend to label distributions
-    * Write a conclusion
-    * If there is a difference in means
-        * Use Cohen's D to measure the effect size
-        * Conduct a Power Analysis
-* Remember if you have multiple groups use ANOVA and Tukey Testing
-* Work should be done in the `student.ipynb` file found in the `notebooks/` directory
-* Create a custom README.md for your repo
+## Question: Is there a difference in order quantity per purchasing region?
 
-## Database Schema
+## Methods
+Order and Order Detail tables were joined. The data was grouped by region, excess columns cleaned and stored in a dictionary of individual pd.DataFrames (per region). A dictionary of per region’s five point statistics p as pd.Series. 
 
-<img src="images/northwindERD.png"/>
+830 unique purchases orders were split between the following purchasing regions: Western Europe, South America, Central America, North America, Northern Europe, Scandinavia, Southern Europe, British Isles and Eastern Europe.
+
+A normal distribution was observed for 3 regions - 'Central_America', 'Northern_Europe’, 'Eastern_Europe' per the Shapiro-Wilke test at confidence level of 95%. The remaing 6 regions did not have normal distributions. 
+
+ANOVA test was conducted to find if there was a difference in means. There was. 
+
+Tukey testing was performed to find which regions were statistically different from the others.
+
+## Conclusions
+There are 10 regional comparisions where the means are statistically different (with confidence level of 95%).
+
+## Future Work
+
+1.	Further explore region ordering data by splitting it into corresponding cities.
+2. Explore if higher purchase volumes are correlated with specific times of year.
+3.	Explore if higher purchase volume is correlated to sales person representing the region.
 
 
-## Cause Memes
-<img src="images/anovaMeme.jpeg"/>
 
-# Good luck!
+
